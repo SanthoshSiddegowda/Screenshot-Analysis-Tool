@@ -1,61 +1,115 @@
-# OA Coder
+# Screenshot Analysis Tool
 
-OA Coder is an Electron application that captures screenshots and leverages the OpenAI API to analyze them. It can solve questions, generate code, or provide detailed answers based on screenshots. The app supports both single screenshot processing and multi-page mode for capturing multiple images before analysis.
+An Electron-based application that captures screenshots and analyzes them using OpenAI's GPT-4 Vision API.
 
 ## Features
 
-- **Screenshot Capture:** Use global keyboard shortcuts to capture the screen.
-- **OpenAI Integration:** Send captured screenshots to OpenAI's chat API for automated analysis.
-- **Multi-Page Mode:** Combine multiple screenshots for questions spanning several pages.
-- **Customizable UI:** Transparent, always-on-top window with an instruction banner and markdown-rendered responses.
-- **Global Shortcuts:** Easily control the application using keyboard shortcuts.
-
-## Prerequisites
-
-- [Node.js](https://nodejs.org/) (v14 or later recommended)
-- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
-- An OpenAI API key
+- Quick screenshot capture with keyboard shortcuts
+- Multi-page screenshot mode
+- Real-time AI analysis of screenshots
+- Always-on-top overlay window
+- Cross-platform support (Windows, macOS, Linux)
 
 ## Installation
 
-1. **Clone the repository:**
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/SanthoshSiddegowda/Screenshot-Analysis-Tool.git
+   cd screenshot-analysis-tool
+   ```
 
-   ```
-   git clone https://github.com/archangel0x01/oa-coder.git
-   cd oa-coder
-   ```
-2. **Install the dependencies:**
-   ```
+2. Install dependencies:
+   ```bash
+   yarn install
+   # or if you prefer npm
    npm install
    ```
-3. **Configure the application:**
-   Create a config.json file in the project root with your OpenAI API key and (optionally) your desired model. For example:
-    ```
-    {
-      "apiKey": "YOUR_OPENAI_API_KEY",
-      "model": "gpt-4o-mini"
-    }
-    ```
-  - Note: If the model field is omitted, the application defaults to "gpt-4o-mini".
 
+3. Install required packages:
+   ```bash
+   yarn install
+   ```
 
-## Usage
+4. Set up environment variables:
+   ```bash
+   cp .env.example .env
+   ```
+   Then edit `.env` and add your OpenAI API key.
 
-1. **Start the Application:**
-    Run the following command to launch OA Coder:
-    ```
-    npm start
-    ```
-2. **Global Keyboard Shortcuts:**
+5. Start the application:
+   ```bash
+   yarn electron .
+   # or
+   npm run electron .
+   ```
 
-    - Ctrl+Shift+S: Capture a screenshot and process it immediately. In multi-page mode, this shortcut finalizes the session and sends all captured screenshots for processing.
-    - Ctrl+Shift+A: Capture an additional screenshot in multi-page mode. The instruction banner will remind you of the mode and available shortcuts.
-    - Ctrl+Shift+R: Reset the current process, clearing all captured screenshots and any displayed results.
+## Configuration
 
+### Environment Variables
 
-## Status
+Create a `.env` file in the root directory with the following:
+```
+OPENAI_API_KEY=your_openai_api_key_here
+MODEL=gpt-4o-mini
+```
 
-This program is still under development. Some features may not be fully implemented, and there might be bugs or incomplete functionality. Your feedback and contributions are welcome as we work towards a more stable release.
+## Security
 
+- Never commit the `.env` file
+- Store sensitive API keys securely
+- Use `.env.example` for sharing required variable names
+- Regularly rotate API keys if compromised
 
-**Personal Thoughts**: Inspired by interviewcoder.co but didn't like the idea of gatekeeping **cheating** softwares behind paywalls. Like you're literally cheating wtf man? And this might help incompetent software engineers join the company and eat it from the inside forcing companies to realise that Leetcode isn't the only way people should get hired and there are other alternative ways to assess a candidate's abilities.
+## Troubleshooting
+
+Common issues and solutions:
+
+1. **Screenshots not working**
+   - Ensure proper screen capture permissions
+   - Check if running with necessary privileges
+
+2. **API errors**
+   - Verify API key is correct in `.env`
+   - Check OpenAI API status
+   - Confirm sufficient API credits
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch:
+   ```bash
+   git checkout -b feature/amazing-feature
+   ```
+3. Commit your changes:
+   ```bash
+   git commit -m 'Add amazing feature'
+   ```
+4. Push to the branch:
+   ```bash
+   git push origin feature/amazing-feature
+   ```
+5. Open a Pull Request
+
+### Code Style
+
+- Use ESLint for JavaScript linting
+- Follow existing code formatting
+- Add comments for complex logic
+- Write meaningful commit messages
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- OpenAI for GPT-4 Vision API
+- Electron.js framework
+- Screenshot-desktop package
+
+## Support
+
+For support, please:
+1. Check existing issues on GitHub
+2. Create a new issue with detailed description
+3. Include system information and logs

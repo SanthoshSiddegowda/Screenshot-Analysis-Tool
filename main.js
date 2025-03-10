@@ -1,29 +1,16 @@
+require('dotenv').config();
+
 const { app, BrowserWindow, globalShortcut } = require('electron');
 const path = require('path');
 const screenshot = require('screenshot-desktop');
 const fs = require('fs');
 const { OpenAI } = require('openai');
 
-let config;
-try {
-  const configPath = path.join(__dirname, 'config.json');
-  const configData = fs.readFileSync(configPath, 'utf8');
-  config = JSON.parse(configData);
-  
-  if (!config.apiKey) {
-    throw new Error("API key is missing in config.json");
-  }
-  
-  // Set default model if not specified
-  if (!config.model) {
-    config.model = "gpt-4o-mini";
-    console.log("Model not specified in config, using default:", config.model);
-  }
-} catch (err) {
-  console.error("Error reading config:", err);
-  app.quit();
-}
-const openai = new OpenAI({ apiKey: config.apiKey });
+const apiKey = process.env.API_KEY;
+const openai = new OpenAI({ apiKey: apiKey });
+
+// Set default model
+const DEFAULT_MODEL = process.env.MODEL || "gpt-4o-mini";
 
 let mainWindow;
 let screenshots = [];
@@ -80,7 +67,7 @@ async function processScreenshots() {
 
     // Make the request
     const response = await openai.chat.completions.create({
-      model: config.model,
+      model: DEFAULT_MODEL,
       messages: [{ role: "user", content: messages }],
       max_tokens: 5000
     });
